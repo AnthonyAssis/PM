@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Megrim&family=Michroma&display=swap" rel="stylesheet">
+    <title>Calculadora</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="left">
+            <p>Calcular média</p>
+            <label for="N1">Primeira nota</label>
+            <input type="number" id="N1"> <br>
+            <label for="N2">Segunda nota</label>
+            <input type="number" id="N2"> <br>
+            <label for="N3">Terceira nota</label>
+            <input type="number" id="N3"><br>
+            <button onclick="Media()">Executar</button>
+        </div>
+        <div class="right">
+            <div id="situacaodiv">
+                <p id="situacao">...</p>
+            </div>
+            <img src="sprites/catchoro.jpg" id="dogimg">
+            <p>Resultado</p>
+            <div class="answr">
+                <h1 id="Answer"></h1>
+            </div>
+            <button onclick="Limpar()" id="limpar">Limpar</button>
+        </div>
+
+        <script>
+            function Media() {
+                let N1 = parseFloat(document.getElementById('N1').value);
+                let N2 = parseFloat(document.getElementById('N2').value);
+                let N3 = parseFloat(document.getElementById('N3').value);
+                if (isNaN(N1) || isNaN(N2) || isNaN(N3)) {
+                    alert("Por favor, preencha todos os campos corretamente.");
+                    return;
+                }
+                else {
+                    let M = (N1 + N2 + N3) / 3;
+                    document.getElementById("Answer").innerHTML = M.toFixed(2);
+                    document.getElementById("dogimg").style.opacity = 0;
+                    document.getElementById("situacaodiv").style.opacity = 1;
+                    if (M >= 7) {
+                        document.getElementById("situacaodiv").style.border = "3pt solid #00ffa6"
+                        document.getElementById("situacaodiv").style.backgroundImage = "linear-gradient(to bottom, #1aba6f, #1aba6f, #129f7e, #0a8084)"
+                        document.getElementById("situacao").innerHTML = "Aprovado!"
+                    }
+                    else if (M >= 5 && M < 7) {
+                        document.getElementById("situacaodiv").style.border = "3pt solid #ff6200"
+                        document.getElementById("situacaodiv").style.backgroundImage = "linear-gradient(to bottom, #ffa43d, #ffa43d, #ff983d, #ff8b3d)"
+                        document.getElementById("situacao").innerHTML = "Recuperação..."
+                    }
+                    else {
+                        document.getElementById("situacaodiv").style.border = "3pt solid #b20018"
+                        document.getElementById("situacaodiv").style.backgroundImage = "linear-gradient(to bottom, #ee1f4c, #ee1f4c, #be0023, #850019)"
+                        document.getElementById("situacao").innerHTML = "Reprovado."
+                    }
+                }
+            }
+            function Limpar() {
+                document.getElementById("N1").value = "";
+                document.getElementById("N2").value = "";
+                document.getElementById("N3").value = "";
+                document.getElementById("Answer").innerHTML = " ";
+                document.getElementById("dogimg").style.opacity = 1;
+                document.getElementById("situacaodiv").style.opacity = 0;
+            }
+        </script>
+    </div>
+</body>
+
+</html>
